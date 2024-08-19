@@ -32,6 +32,7 @@ int main(){
     for(int i=0; i<n; i++){
         cin >> text;
         map1[text]=i;
+        
         for(int j=0; j<m; j++){
             cin >> text;
             if(map1[text]==true){
