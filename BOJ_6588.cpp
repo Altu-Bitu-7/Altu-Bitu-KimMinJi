@@ -41,17 +41,15 @@ int main() {
 	//출력
 	for (int i = 0; i < arr.size(); i++) {
 		for (int a = 3; a <= arr[i]; a += 2) {
-			//두 수가 모두 소수인 경우
 			if (is_prime[a] && is_prime[arr[i] - a]) {
 				cout << arr[i] << " = " << a << " + " << arr[i] - a << '\n';
 				break;
 			}
-			//두 수 중 하나라도 소수가 아닌 경우
-			else if (is_prime[arr[i] - a] == 1) {
-				cout << "Goldbach's conjecture is wrong." << '\n';
-			}
+		}
+		if (arr[i] - (i + 3) == 0) {
+			cout << "Goldbach's conjecture is wrong." << '\n';
 		}
 	}
 
-    return 0;
+	return 0;
 }
