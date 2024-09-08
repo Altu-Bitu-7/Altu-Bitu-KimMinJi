@@ -24,27 +24,32 @@ int main() {
 	cin.tie(NULL);
 	cout.tie(NULL);
 
-    //입력
 	getPrimes();
 	int n;
+	vector<int> arr;
 
-    while (true) {
-        cin >> n;
+	//입력
+	while (true) {
+		cin >> n;
 		if (n == 0) {
 			break;
 		}
+		arr.push_back(n);
+	}
 
-		//연산
-		//출력
-		for (int a = 3; a <= n; a += 2) {
-			if (is_prime[a] && is_prime[n - a]) {
-				cout << n << " = " << a << " + " << n - a << '\n';
+	//연산
+	//출력
+	for (int i = 0; i < arr.size(); i++) {
+		for (int a = 3; a <= arr[i]; a += 2) {
+			if (is_prime[a] && is_prime[arr[i] - a]) {
+				cout << arr[i] << " = " << a << " + " << arr[i] - a << '\n';
 				break;
 			}
-			else {
+			else if (is_prime[arr[i] - a] == 1) {
 				cout << "Goldbach's conjecture is wrong." << '\n';
 			}
 		}
-    }
+	}
+
     return 0;
 }
