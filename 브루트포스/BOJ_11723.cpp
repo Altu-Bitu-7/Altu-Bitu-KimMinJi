@@ -15,15 +15,18 @@ int main() {
     //연산
     int s = 0;
     while (m--) {
-        cin >> input.first >> input.second;
+        cin >> input.first;
         if (input.first == "add") {
+            cin >> input.second;
             s = s | (1 << input.second);
         }
         else if (input.first == "remove") {
+            cin >> input.second;
             s = s & ~(1 << input.second);
         }
         //출력
         else if (input.first == "check") {
+            cin >> input.second;
             if (s & (1 << input.second)) {
                 cout << "1\n";
             }
@@ -32,6 +35,7 @@ int main() {
             }
         }
         else if (input.first == "toggle") {
+            cin >> input.second;
             if (s & (1 << input.second)) {
                 s = s & ~(1 << input.second);
             }
