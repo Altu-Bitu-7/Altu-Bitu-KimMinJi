@@ -5,7 +5,7 @@ using namespace std;
 
 const int MAX = 8;
 
-void moveLocation(char direction, int move_x, int move_y) {
+void moveLocation(char direction, int &move_x, int &move_y) {
     switch (direction)
     {
     case 'R':
@@ -46,7 +46,7 @@ int main() {
             moveLocation(move[j], move_x, move_y);
         }
         //체스판 밖으로 안 나가는 경우에만 이동
-        if ((king_x + move_x <= MAX) && (king_y + move_y <= MAX)) {
+        if ((king_x + move_x > 0) && (king_y + move_y > 0) && (king_x + move_x <= MAX) && (king_y + move_y <= MAX)) {
             king_x += move_x;
             king_y += move_y;
 
@@ -54,12 +54,20 @@ int main() {
             king_location[1] = king_y + '0';
 
             if (king_location == stone_location) {
-                if ((stone_x + move_x <= MAX) && (stone_y + move_y <= MAX)) {
+                if ((stone_x + move_x > 0) && (stone_y + move_y > 0) && (stone_x + move_x <= MAX) && (stone_y + move_y <= MAX)) {
                     stone_x += move_x;
                     stone_y += move_y;
 
                     stone_location[0] = 'A' + (stone_x - 1);
                     stone_location[1] = stone_y + '0';
+                }
+                //이동시킨 king의 위치가 stone과 같아서 stone도 같은 방향으로 이동시켰는데 체스판 위를 벗어나는 경우
+                else {
+                    king_x -= move_x;
+                    king_y -= move_y;
+
+                    king_location[0] = 'A' + (king_x - 1);
+                    king_location[1] = king_y + '0';
                 }
             }
         }
