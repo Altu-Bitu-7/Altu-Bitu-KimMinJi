@@ -8,7 +8,7 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
 
     int n, value;
-    priority_queue<int> heap;
+    priority_queue<int, vector<int>, greater<int>> heap;
 
     //입력
     cin >> n;
@@ -17,9 +17,10 @@ int main() {
     for ( int i = 0; i < n * n; i++ ) {
         cin >> value;
         heap.push(value);
-    }
-    for ( int i = 1; i < n; i++ ) {
-        heap.pop();
+
+        if ( heap.size() > n ) {
+            heap.pop();
+        }
     }
 
     //출력
