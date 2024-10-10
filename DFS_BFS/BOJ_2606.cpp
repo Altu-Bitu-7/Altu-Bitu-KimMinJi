@@ -3,8 +3,8 @@
 using namespace std;
 
 int n, pair_count;
-int graph[100][100] = { 0, };
-bool visited[100] = { false, };
+int graph[101][101] = { 0, };
+bool visited[101] = { false, };
 
 void dfs(int num) {
     for ( int i = 1; i <= n; i++ ) {
