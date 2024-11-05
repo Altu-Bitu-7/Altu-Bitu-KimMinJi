@@ -5,18 +5,15 @@
 using namespace std;
 
 int n, m;
-vector<int> location;
 
 bool checkShineAll(int n, int m, int height, vector<int> location)
 {
-    for ( int i = 0; i < m; i++ )
+    //첫번째 가로등의 위치와 높이 비교
+    if ( location[0] > height )
+        return false;
+
+    for ( int i = 1; i < m; i++ )
     {
-        //첫번째 가로등의 위치와 높이 비교
-        if ( i == 0 )
-        {
-            if ( location[i] > height )
-                return false;
-        }
         //두 가로등의 간격과 높이 비교
         if ( location[i] - location[i - 1] > 2 * height )
             return false;
@@ -29,43 +26,39 @@ bool checkShineAll(int n, int m, int height, vector<int> location)
     return true;
 }
 
-void binarySearch(int left, int right, int height, vector<int> location)
+void binarySearch(int left, int right, vector<int>& location)
 {
+    int height = 0;
+
     while ( left <= right )
     {
         int mid = (left + right) / 2;
         
-        if ( checkShineAll(n, m, height, location) )
+        if ( checkShineAll(n, m, mid, location) )
         {
-            right = mid - 1;
             height = mid;
+            right = mid - 1;
         }
         else
-        {
             left = mid + 1;
-        }
     }
+    //출력
+    cout << height;
 }
 
 int main()
 {
-   int height;
+    //입력
+    cin >> n >> m;
+    
+    vector<int> location(m);
+    for ( int i = 0; i < m; i++ ) {
+        cin >> location[i];
+    }
 
-   //입력
-   cin >> n;
-   cin >> m;
-
-   for ( int i = 0; i < m; i++ )
-   {
-      cin >> location[i];
-   }
-
-   //연산
+    //연산
     sort(location.begin(), location.end());
-    binarySearch(0, n - 1, height, location);
+    binarySearch(0, n, location);
 
-   //출력
-    cout << height;
-
-   return 0;
+    return 0;
 }

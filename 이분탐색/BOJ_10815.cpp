@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int binarySearch(int n, int target, vector<int> nums)
+int binarySearch(int n, int target, vector<int>& card)
 {
     int left = 0;
     int right = n - 1;
@@ -13,9 +13,9 @@ int binarySearch(int n, int target, vector<int> nums)
     {
         int mid = (left + right) / 2;
 
-        if ( nums[mid] == target )
+        if ( card[mid] == target )
             return 1;
-        if ( nums[mid] > target )
+        if ( card[mid] > target )
             right = mid - 1;
         else
             left = mid + 1;
@@ -26,11 +26,14 @@ int binarySearch(int n, int target, vector<int> nums)
 
 int main()
 {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+    
     int n, m, target;
-    vector<int> card(n);
 
     //입력
     cin >> n;
+    vector<int> card(n);
     for ( int i = 0; i < n; i++ )
     {
         cin >> card[i];
